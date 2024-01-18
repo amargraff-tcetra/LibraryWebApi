@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using LibraryWebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 
@@ -10,20 +11,24 @@ namespace LibraryWebApi.Controllers
     [ApiController]
     public class BooksController : ControllerBase
     {
-        // GET: api/<BooksController>
+        // GET: api/books
         [HttpGet]
-        public List<string> Get()
+        public async Task<List<string>> Get()
         {
-            var db = new SqlConnection("Data Source=127.0.0.1,1433;Initial Catalog=master;Persist Security Info=True;User ID=sa;Password=SQLserver123!;Trust Server Certificate=True");
+            var db = new SqlConnection("Data Source=127.0.0.1,1433;Initial Catalog=MyLibrary;Persist Security Info=True;User ID=sa;Password=SQLserver123!");
 
-            return new List<string> 
-            { 
-                "The Hobbit",
-                "Dune",
-                "Harry Potter and the Sourecer's Stone",
-                "The Lion, Witch and the Wordrobe",
-                "The Lord of the Rings"
-            };
+            var books = await db.QueryAsync<Book>("SELECT * FROM book");
+
+            return books.Select(b => b.title).ToList();
+
+            //return new List<string> 
+            //{ 
+            //    "The Hobbit",
+            //    "Dune",
+            //    "Harry Potter and the Sourecer's Stone",
+            //    "The Lion, Witch and the Wordrobe",
+            //    "The Lord of the Rings"
+            //};
         }
 
         // GET api/<BooksController>/5
