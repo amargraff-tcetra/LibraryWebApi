@@ -21,8 +21,8 @@ namespace LibraryWebApi.Controllers
 
             return books.Select(b => b.title).ToList();
 
-            //return new List<string> 
-            //{ 
+            //return new List<string>
+            //{
             //    "The Hobbit",
             //    "Dune",
             //    "Harry Potter and the Sourecer's Stone",
