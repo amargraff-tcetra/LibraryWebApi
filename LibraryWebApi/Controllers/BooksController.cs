@@ -15,7 +15,8 @@ namespace LibraryWebApi.Controllers
         [HttpGet]
         public async Task<List<string>> Get()
         {
-            var db = new SqlConnection("Data Source=127.0.0.1,1433;Initial Catalog=MyLibrary;Persist Security Info=True;User ID=sa;Password=SQLserver123!");
+            //var db = new SqlConnection("Data Source=127.0.0.1,1433;Initial Catalog=MyLibrary;Persist Security Info=True;User ID=sa;Password=SQLserver123!");
+            var db = new SqlConnection("Data Source=library_database,1433;Initial Catalog=MyLibrary;Persist Security Info=True;User ID=sa;Password=SQLserver123!");
 
             var books = await db.QueryAsync<Book>("SELECT * FROM book");
 
